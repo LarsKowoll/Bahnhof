@@ -24,7 +24,7 @@ public class Lokfuehrer extends Thread {
 				if (_zahl % 2 == 0) {
 					_bahnhof.zugAusfahren((int) (Math.random() * (8)));
 				} else if (_zahl % 2 == 1) {
-					Zug zug = new Zug();
+					Zug zug = new Zug(_zahl);
 					_bahnhof.zugEinfahren(zug, (int) (Math.random() * (8)));
 				}
 				

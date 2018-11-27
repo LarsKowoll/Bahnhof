@@ -22,7 +22,7 @@ public class Bahnhof extends Thread {
 		if (Gleise[gleisnummer] == null && zug != null) {
 			Gleise[gleisnummer] = zug;
 			zugUnterwegs[gleisnummer] = null;
-			System.out.println(zug + " Willkommen im Hamburger Hauptbahnhof");
+			System.out.println(zug + " fährt ein. Willkommen im Hamburger Hauptbahnhof!");
 		}
 		
 	}
@@ -39,7 +39,7 @@ public class Bahnhof extends Thread {
 		if (Gleise[gleisnummer] != null) {
 			temp = Gleise[gleisnummer];
 			Gleise[gleisnummer] = null;
-			System.out.println(temp + " fährt nach Hause. In Hamburg sagt man Tschüss");		
+			System.out.println(temp + " fährt nach Hause. In Hamburg sagt man Tschüss!");		
 		}
 		return temp;
 	}
@@ -47,7 +47,7 @@ public class Bahnhof extends Thread {
 	@Override
 	public void run() {
 		for (int i = 0; i < Gleise.length; i++) {
-			Zug zug = new Zug();
+			Zug zug = new Zug(i);
 			Gleise[i] = zug;
 
 		}
