@@ -8,7 +8,7 @@ import java.util.Map;
 import java.awt.Graphics;
 import javax.swing.event.*;
 
-public class SimulatorAnsicht extends JFrame {
+public class Visualisierung extends JFrame implements IBeobachter {
 	private final String ANZAHL_ZUEGE_PREFIX = "Anzahl Zuege: ";
 	private final String BESETZTE_GLEISE_PREFIX = "Besetzte Gleise: ";
 	private JLabel anzahlZuege, besetzteGleise;
@@ -20,8 +20,8 @@ public class SimulatorAnsicht extends JFrame {
 	 * @param hoehe  die Höhe der Simulation
 	 * @param breite die Breite der Simulation
 	 */
-	public SimulatorAnsicht(int hoehe, int breite) {
-
+	public Visualisierung(int hoehe, int breite) {
+		
 		setTitle("Simulation des Hamburger Hauptbahnhofs");
 		anzahlZuege = new JLabel(ANZAHL_ZUEGE_PREFIX, JLabel.CENTER);
 		besetzteGleise = new JLabel(BESETZTE_GLEISE_PREFIX, JLabel.CENTER);
@@ -151,5 +151,10 @@ public class SimulatorAnsicht extends JFrame {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void aktualisieren(IBeobachtbar beobachtbar) {
+		zeigeStatus(1, beobachtbar.gibZustand());
 	}
 }
