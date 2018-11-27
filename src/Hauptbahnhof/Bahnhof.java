@@ -9,7 +9,7 @@ public class Bahnhof extends Thread {
 	int zaehler;
 
 	public Bahnhof() {
-
+		zaehler = 0;
 	}
 
 	public synchronized void zugEinfahren(Zug zug, int gleisnummer) {
@@ -62,7 +62,6 @@ public class Bahnhof extends Thread {
 			Thread lokfuehrerThread = new Thread(lokfuehrer);
 			lokfuehrerThread.start();
 			zaehler++;
-			
 		}
 			
 	}

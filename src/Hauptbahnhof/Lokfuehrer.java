@@ -9,7 +9,7 @@ public class Lokfuehrer extends Thread {
 	public Lokfuehrer(Bahnhof bahnhof, int zahl) {
 		_bahnhof = bahnhof;
 		_zahl = zahl;
-		
+		fertig = false;
 	}
 
 	public void run() {
