@@ -3,10 +3,17 @@ package Hauptbahnhof;
 public class Simulation implements Runnable, IBeobachtbar{
 	
 	private Bahnhof _bahnhof;
+	private int[] _gleiseWarteschlange;
+	private int _anzahlGleise;
+	
+	public Simulation(int anzahlGleise) {
+		_anzahlGleise = anzahlGleise;
+		_gleiseWarteschlange = new int[anzahlGleise];
+	}
 	
 	@Override
 	public void run() {
-		Bahnhof bahnhof = new Bahnhof(120, 80);
+		Bahnhof bahnhof = new Bahnhof(120, 80, 10);
 		Bahnhof._bahnhof = bahnhof;
 		_bahnhof = bahnhof;
 		bahnhof.erstelleLokfuehrer();
@@ -16,7 +23,7 @@ public class Simulation implements Runnable, IBeobachtbar{
 		Visualisierung visualisierung = new Visualisierung(tiefe, breite);
 		anmelden(visualisierung);
 		
-		int zaehler = 0;
+		int zaehler = _anzahlGleise;
 		
 		while (true) {
 			try {
@@ -25,7 +32,8 @@ public class Simulation implements Runnable, IBeobachtbar{
 
 				System.out.println("Demo-Thread");
 			}
-			Lokfuehrer lokfuehrer = new Lokfuehrer(bahnhof, zaehler);
+			_gleiseWarteschlange = bahnhof.getGleiseWarteschlange();
+			Lokfuehrer lokfuehrer = new Lokfuehrer(bahnhof, zaehler, _gleiseWarteschlange);
 			Thread lokfuehrerThread = new Thread(lokfuehrer);
 			lokfuehrerThread.start();
 

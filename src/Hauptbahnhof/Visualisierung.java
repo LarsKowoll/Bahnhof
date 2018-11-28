@@ -9,9 +9,8 @@ import java.awt.Graphics;
 import javax.swing.event.*;
 
 public class Visualisierung extends JFrame implements IBeobachter {
-	private final String ANZAHL_ZUEGE_PREFIX = "Anzahl Zuege: ";
 	private final String BESETZTE_GLEISE_PREFIX = "Besetzte Gleise: ";
-	private JLabel anzahlZuege, besetzteGleise;
+	private JLabel besetzteGleise;
 	private Feldansicht feldansicht;
 
 	/**
@@ -23,7 +22,6 @@ public class Visualisierung extends JFrame implements IBeobachter {
 	public Visualisierung(int hoehe, int breite) {
 		
 		setTitle("Simulation des Hamburger Hauptbahnhofs");
-		anzahlZuege = new JLabel(ANZAHL_ZUEGE_PREFIX, JLabel.CENTER);
 		besetzteGleise = new JLabel(BESETZTE_GLEISE_PREFIX, JLabel.CENTER);
 
 		setLocation(20, 50);
@@ -31,7 +29,6 @@ public class Visualisierung extends JFrame implements IBeobachter {
 		feldansicht = new Feldansicht(hoehe, breite);
 
 		Container inhalt = getContentPane();
-		inhalt.add(anzahlZuege, BorderLayout.NORTH);
 		inhalt.add(feldansicht, BorderLayout.CENTER);
 		inhalt.add(besetzteGleise, BorderLayout.SOUTH);
 		pack();
@@ -39,14 +36,14 @@ public class Visualisierung extends JFrame implements IBeobachter {
 
 	}
 
-	public void zeigeStatus(int zaehler, Zug[] gleise) {
+	public void zeigeStatus(Zug[] gleise) {
 		feldansicht.zeichnenVorbereiten();
 
 		for (int i = 0; i < gleise.length; i++) {
 			feldansicht.zeichneGleise(5 * i + 19, 10, Color.black);
 
 		}
-		feldansicht.zeichneBahnhof(19, 10, Color.black);
+		feldansicht.zeichneBahnhof(19, 10, Color.black, gleise.length);
 
 		int belegteGleise = 0;
 		for (int i = 0; i < gleise.length; i++) {
@@ -58,7 +55,6 @@ public class Visualisierung extends JFrame implements IBeobachter {
 			}
 		}
 		besetzteGleise.setText(BESETZTE_GLEISE_PREFIX + belegteGleise);
-		anzahlZuege.setText(ANZAHL_ZUEGE_PREFIX + zaehler);
 		feldansicht.repaint();
 	}
 
@@ -130,9 +126,9 @@ public class Visualisierung extends JFrame implements IBeobachter {
 			g.drawRect(x * xFaktor, y * yFaktor, 20, 50);
 		}
 
-		public void zeichneBahnhof(int x, int y, Color farbe) {
+		public void zeichneBahnhof(int x, int y, Color farbe, int gleise) {
 			g.setColor(farbe);
-			g.drawRect(x * xFaktor, y * yFaktor, 230, 70);
+			g.drawRect(x * xFaktor, y * yFaktor, 29 * gleise, 70);
 		}
 
 		/**
@@ -155,6 +151,6 @@ public class Visualisierung extends JFrame implements IBeobachter {
 
 	@Override
 	public void aktualisieren(IBeobachtbar beobachtbar) {
-		zeigeStatus(1, beobachtbar.gibZustand());
+		zeigeStatus(beobachtbar.gibZustand());
 	}
 }
