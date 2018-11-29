@@ -8,30 +8,17 @@ public class Bahnhof {
 	int[] gleiseWarteschlange;
 	static Bahnhof _bahnhof;
 	int zaehler;
-	// Die Standardbreite für ein Feld.
-	private static final int STANDARD_BREITE = 120;
-	// Die Standardtiefe für ein Feld.
-	private static final int STANDARD_TIEFE = 80;
+
 	Visualisierung ansicht;
 
 	public Bahnhof(int tiefe, int breite, int anzahlGleise) {
-		if (breite <= 0 || tiefe <= 0) {
-			System.out.println("Abmessungen müssen größer als null sein.");
-			System.out.println("Benutze Standardwerte.");
-			tiefe = STANDARD_TIEFE;
-			breite = STANDARD_BREITE;
-		}
+		
 		gleise = new Zug[anzahlGleise];
 		gleiseWarteschlange = new int[anzahlGleise];
 	}
 
 	public synchronized void zugEinfahren(Zug zug, int gleisnummer) {
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			
-			System.out.println("Demo-Thread");
-		}
+
 		if (gleise[gleisnummer] == null && zug != null) {
 			gleise[gleisnummer] = zug;
 			System.out.println(zug + " fährt auf Gleis " + gleisnummer + " ein. Willkommen im Hamburger Hauptbahnhof!");
@@ -44,12 +31,6 @@ public class Bahnhof {
 	}
 
 	public synchronized Zug zugAusfahren(int gleisnummer) {
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-
-			System.out.println("Demo-Thread");
-		}
 
 		Zug temp = null;
 		if (gleise[gleisnummer] != null) {
@@ -63,7 +44,7 @@ public class Bahnhof {
 		return temp;
 	}
 
-	public void erstelleLokfuehrer() {
+	public void erstelleZuege() {
 		for (int i = 0; i < gleise.length; i++) {
 			Zug zug = new Zug(i);
 			gleise[i] = zug;

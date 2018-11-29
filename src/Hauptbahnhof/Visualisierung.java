@@ -61,9 +61,9 @@ public class Visualisierung extends JFrame implements IBeobachter {
 	/**
 	 * Liefere eine grafische Ansicht eines rechteckigen Feldes. Dies ist eine
 	 * geschachtelte Klasse (eine Klasse, die innerhalb einer anderen Klasse
-	 * definiert ist), die eine eigene grafische Komponente für die
+	 * definiert ist), die eine eigene grafische Komponente fuer die
 	 * Benutzungsschnittstelle definiert. Diese Komponente zeigt das Feld an. Dies
-	 * ist fortgeschrittene GUI-Technik - Sie können sie für Ihr Projekt
+	 * ist fortgeschrittene GUI-Technik - Sie oennen sie fuer Ihr Projekt
 	 * ignorieren, wenn Sie wollen.
 	 */
 	private class Feldansicht extends JPanel {
@@ -97,7 +97,7 @@ public class Visualisierung extends JFrame implements IBeobachter {
 		 * geändert werden kann, muss der Maßstab neu berechnet werden.
 		 */
 		public void zeichnenVorbereiten() {
-			if (!groesse.equals(getSize())) { // Größe wurde geändert...
+			if (!groesse.equals(getSize())) { // Groesse wurde geaendert...
 				groesse = getSize();
 				feldImage = feldansicht.createImage(groesse.width, groesse.height);
 				g = feldImage.getGraphics();
@@ -142,7 +142,7 @@ public class Visualisierung extends JFrame implements IBeobachter {
 				if (groesse.equals(aktuelleGroesse)) {
 					g.drawImage(feldImage, 0, 0, null);
 				} else {
-					// Größe des aktuellen Images anpassen.
+					// Groesse des aktuellen Images anpassen.
 					g.drawImage(feldImage, 0, 0, aktuelleGroesse.width, aktuelleGroesse.height, null);
 				}
 			}

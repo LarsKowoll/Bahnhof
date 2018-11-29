@@ -14,32 +14,43 @@ public class Lokfuehrer implements Runnable {
 
 	@Override
 	public void run() {
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
 
-			System.out.println("Demo-Thread");
-		}
-
-		if (_zahl % 2 == 0) {
-			int gleis = 0;
-			for (int i = 0; i < _gleiseWarteschlange.length; i++) {
-				if (gleis < _gleiseWarteschlange[i]) {
-					gleis = _gleiseWarteschlange[i];
-				}
+		boolean gleisGefunden = false;
+		int gleis = 0;
+		
+		if (_zahl % 2 == 1) {
+//			int wartendeZuege = 0;
+//			for (int i = 0; i < _gleiseWarteschlange.length; i++) {
+//				if (wartendeZuege < _gleiseWarteschlange[i]) {
+//					wartendeZuege = _gleiseWarteschlange[i];
+//					gleis = i;
+//					gleisGefunden = true;
+//				}
+//			}
+			if (!gleisGefunden) {
+				gleis = (int) (Math.random() * _gleiseWarteschlange.length);
 			}
 			_bahnhof.zugAusfahren(gleis);
-		} else if (_zahl % 2 == 1) {
-			int gleis = Integer.MAX_VALUE;;
-			for (int i = 0; i < _gleiseWarteschlange.length; i++) {
-				if (gleis > _gleiseWarteschlange[i]) {
-					gleis = _gleiseWarteschlange[i];
-				}
+		} else if (_zahl % 2 == 0) {
+//			int wartendeZuege = Integer.MAX_VALUE;
+//			for (int i = 0; i < _gleiseWarteschlange.length; i++) {
+//				if (wartendeZuege > _gleiseWarteschlange[i]) {
+//					wartendeZuege = _gleiseWarteschlange[i];
+//					gleis = i;
+//					gleisGefunden = true;
+//				}
+//			}
+			if (!gleisGefunden) {
+				gleis = (int) (Math.random() * _gleiseWarteschlange.length);
 			}
 			Zug zug = new Zug(_zahl);
 			_bahnhof.zugEinfahren(zug, gleis);
 		}
 		
+		for (int i = 0; i < _gleiseWarteschlange.length; i++) {
+			System.out.print(_gleiseWarteschlange[i] + " ");
+		}
+		System.out.println();
 		
 	}
 }
